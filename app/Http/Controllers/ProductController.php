@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        dd("abc");
     }
 
     /**
@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+       return view('products.create');
     }
 
     /**
@@ -40,10 +40,13 @@ class ProductController extends Controller
             'detail' => 'required'      
         ]);
     
-        Product::create($request->all());
+        Product::create([
+            'name' => $request->name,
+            'detail' => $request->detail
+        ]);
 
 
-        return redirect()->route('products.index')-> with('success','Product created successfully');
+    return redirect()->route('products.index')-> with('success','Product created successfully');
          
     }
 
