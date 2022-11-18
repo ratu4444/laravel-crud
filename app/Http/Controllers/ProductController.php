@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        dd("abc");
+        //
     }
 
     /**
@@ -24,72 +24,51 @@ class ProductController extends Controller
      */
     public function create()
     {
-       return view('products.create');
+        return view('pcreate');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required'      
+            'pname' => 'required',
+            'description' => 'required',
+            'pprice' => 'required'
         ]);
-    
+
         Product::create([
-            'name' => $request->name,
-            'detail' => $request->detail
+            'product_name' => $request->pname,
+            'product_description' => $request -> description,
+            'product_price' => $request -> pprice
+
         ]);
-
-
-    return redirect()->route('products.index')-> with('success','Product created successfully');
-         
+        return redirect(route('products.create'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+
+    public function show()
     {
-        //
+        $product = Product::get();
+        return view('product_view',compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+    public function edit($id,Product $product)
     {
-        //
+        $product = $product->find($id);
+//      $product = $product->where('id',$id)->first();
+
+
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Product $product)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Product $product)
     {
         //
