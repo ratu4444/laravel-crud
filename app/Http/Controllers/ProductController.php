@@ -7,21 +7,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('pcreate');
@@ -42,7 +34,7 @@ class ProductController extends Controller
             'product_price' => $request -> pprice
 
         ]);
-        return redirect(route('products.create'));
+        return redirect(route('products-create'));
     }
 
 
@@ -50,14 +42,13 @@ class ProductController extends Controller
     {
         $product = Product::get();
         return view('product_view',compact('product'));
+
     }
 
-    public function edit($id,Product $product)
+    public function edit(Product $product)
     {
-        $product = $product->find($id);
+        return view('update', compact('product'));
 //      $product = $product->where('id',$id)->first();
-
-
 
 
     }
@@ -65,12 +56,27 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'pname' => 'required',
+            'description' => 'required',
+            'pprice' => 'required'
+        ]);
+
+
+        $product->update([
+            'product_name' => $request->pname,
+            'product_description' => $request->description,
+            'product_price' => $request->pprice
+
+        ]);
+        return redirect(route('products-show'));
     }
 
 
     public function destroy(Product $product)
     {
-        //
+        dd($product);
+        $product-> delete();
+        return redirect(route('products-show'));
     }
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form action="{{ route('products.store') }}" method="post">
+<form action="{{ route('products-store') }}" method="post">
   @csrf
   <div class="form-group">
     <label for="">Product Name</label>

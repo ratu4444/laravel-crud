@@ -9,24 +9,27 @@
 </head>
 <body>
 
-<form action="{{ }}" method="post">
+<form action="{{ route('products-update',$product->id)  }}" method="post">
     @csrf
+    @method('put')
+
     <div class="form-group">
         <label for="">Product Name</label>
-        <input name="pname" type="text" class="form-control" value="{{ product->product_name }}" aria-describedby="" placeholder="Product Name">
+        <input name="pname" type="text" class="form-control" value="{{ $product->product_name }}" aria-describedby="" placeholder="Product Name">
         <small id="" class="">We'll share your product name with every customer.</small>
     </div>
     <div class="form-group">
         <label for="">Description</label>
-        <input name="description" type="text" class="form-control" alue="{{ product->product_description }}" id="" aria-describedby="" placeholder="Describe your product">
+        <input name="description" type="text" class="form-control" value="{{ $product->product_description }}" id="" aria-describedby="" placeholder="Describe your product">
         <small id="" class="">We'll share your product description with every customer.</small>
     </div>
     <div class="form-group">
         <label for="">Price</label>
-        <input name="pprice" type="text" class="form-control" alue="{{ product->product_price }}" id="" aria-describedby="" placeholder="Price">
+        <input name="pprice" type="text" class="form-control" value="{{ $product->product_price }}" id="" aria-describedby="" placeholder="Price">
         <small id="" class="">We'll share your product price with every customer.</small>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+
 </form>
 </body>
 </html>
